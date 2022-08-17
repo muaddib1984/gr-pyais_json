@@ -1,0 +1,35 @@
+id: pyais_parser_pyais_json
+label: pyais JSON Parser
+category: '[PYAIS]'
+templates:
+  imports: from gnuradio import ais
+  make: ais.json_parser(${filename}, ${console_output})
+
+parameters:
+- id: logtofile
+  label: Log to File
+  dtype: bool
+  options: [True, False]
+  options_labels: [On,Off]
+  default: False
+
+- id: filename
+  label: Log Filename
+  dtype: string
+  default: "/tmp/ais_log.json"
+  hide: ${'all' if logtofile == False else 'none'}
+
+- id: console_output
+  label: Console Output
+  dtype: bool
+  options: [ True, False ]
+  options_labels: [ On,Off ]
+  default: True
+
+inputs:
+- label: nmea_in
+  domain: message
+
+#  'file_format' specifies the version of the GRC yml format used in the file
+#  and should usually not be changed.
+file_format: 1
