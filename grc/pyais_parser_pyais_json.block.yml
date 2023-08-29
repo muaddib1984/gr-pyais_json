@@ -10,7 +10,6 @@ parameters:
   label: Log to File
   dtype: bool
   options: [True, False]
-  options_labels: [On,Off]
   default: False
 
 - id: filename
@@ -23,7 +22,6 @@ parameters:
   label: Console Output
   dtype: bool
   options: [ True, False ]
-  options_labels: [ On,Off ]
   default: True
 
 inputs:
