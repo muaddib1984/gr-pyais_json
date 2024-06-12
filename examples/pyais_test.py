@@ -7,9 +7,8 @@
 # GNU Radio Python Flow Graph
 # Title: Test application for gr-PyAIS JSON Parser
 # Author: muaddib
-# GNU Radio version: 3.10.3.0
+# GNU Radio version: v3.10.9.2-8-g2faa48e5
 
-from gnuradio import ais
 from gnuradio import blocks
 import pmt
 from gnuradio import gr
@@ -20,6 +19,7 @@ import signal
 from argparse import ArgumentParser
 from gnuradio.eng_arg import eng_float, intx
 from gnuradio import eng_notation
+from gnuradio import pyais_parser
 
 
 
@@ -38,14 +38,15 @@ class pyais_test(gr.top_block):
         ##################################################
         # Blocks
         ##################################################
-        self.pyais_parser_pyais_json_0 = ais.json_parser('/tmp/ais_log.json', True)
+
+        self.pyais_parser_pyais_json_1 = pyais_parser.pyais_json(True, '/tmp/ais_log2.json', True)
         self.blocks_message_strobe_0 = blocks.message_strobe( pmt.cons(pmt.PMT_NIL,pmt.init_u8vector(len(NMEA_bytes),(NMEA_bytes))), 1000)
 
 
         ##################################################
         # Connections
         ##################################################
-        self.msg_connect((self.blocks_message_strobe_0, 'strobe'), (self.pyais_parser_pyais_json_0, 'nmea_in'))
+        self.msg_connect((self.blocks_message_strobe_0, 'strobe'), (self.pyais_parser_pyais_json_1, 'nmea_in'))
 
 
     def get_NMEA(self):

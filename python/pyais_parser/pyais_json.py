@@ -8,7 +8,7 @@
 
 from gnuradio import gr
 import pmt
-import pyais.decode as decode
+import pyais.decode as pyais_decode
 import array
 import json
 
@@ -30,17 +30,20 @@ class pyais_json(gr.sync_block):
         self.console_output = console_output
         self.filename = filename
         self.logtofile = logtofile
-
+        self.first = True
+        self.cnt = 0
+        self.recs=[]
     def handle_msg(self, msg):
         if msg is not None:
             PMT_msg = pmt.to_python(msg)
             byte_array_msg = array.array('B', PMT_msg[1])
             byte_msg = bytes(byte_array_msg)
-            aisjson = decode(byte_msg).to_json()
+            aisjson = {f'ais_record_{self.cnt}':json.loads(pyais_decode(byte_msg).to_json())}
+            self.recs.append(aisjson)
             if self.console_output == True:
-
-                print(aisjson)
-            if self.logtofile == True:
-                with open(self.filename, 'a') as fobj:
-                    print('writing to log')
-                    fobj.write(aisjson)
+                print(json.dumps(aisjson,indent=2))
+            if self.logtofile==True:
+                if self.first==True:
+                    with open(self.filename,'w') as fobj:
+                        json.dump(self.recs,fobj)
+            self.cnt+=1

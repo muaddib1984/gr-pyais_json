@@ -1,9 +1,9 @@
 id: pyais_parser_pyais_json
 label: pyais JSON Parser
-category: '[PYAIS]'
+category: '[PYAIS_JSON]'
 templates:
-  imports: from gnuradio import ais
-  make: ais.json_parser(${filename}, ${console_output})
+  imports: from gnuradio import pyais_parser
+  make: pyais_parser.pyais_json(${logtofile}, ${filename}, ${console_output})
 
 parameters:
 - id: logtofile

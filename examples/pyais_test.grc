@@ -74,26 +74,26 @@ blocks:
     coordinate: [400, 212.0]
     rotation: 0
     state: true
-- name: pyais_parser_pyais_json_0
+- name: pyais_parser_pyais_json_1
   id: pyais_parser_pyais_json
   parameters:
     affinity: ''
     alias: ''
     comment: ''
     console_output: 'True'
-    filename: /tmp/ais_log.json
-    logtofile: 'False'
+    filename: /tmp/ais_log2.json
+    logtofile: 'True'
   states:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [720, 212.0]
+    coordinate: [896, 80.0]
     rotation: 0
-    state: true
+    state: enabled
 
 connections:
-- [blocks_message_strobe_0, strobe, pyais_parser_pyais_json_0, nmea_in]
+- [blocks_message_strobe_0, strobe, pyais_parser_pyais_json_1, nmea_in]
 
 metadata:
   file_format: 1
-  grc_version: 3.10.3.0
+  grc_version: v3.10.9.2-8-g2faa48e5
